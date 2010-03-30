@@ -11,7 +11,7 @@ those pages and prints a list of proteins that
 need to be rescanned with the website.
 """
 import utils_scripting, utils_graph, elm_tools
-import sys
+import sys, os
 
 req_args = ['list of protiens', 'elm html dir']
 examples = ['../../Data/Network/Human/HPRD/hprd.intr.ls',
@@ -24,7 +24,8 @@ proteins = utils_graph.getNodes(protein_ls_file)
 
 redo_proteins = {}
 for protein in proteins.keys():
-    if elm_tools.checkForErrors(elm_html_dir + protein + '.elm_tidy.html'):
+    if elm_tools.checkForErrors(elm_html_dir + protein + '.elm.html',
+                                elm_html_dir, protein):
         redo_proteins[protein] = True
 
 for protein in redo_proteins.keys():

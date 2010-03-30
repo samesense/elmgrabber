@@ -1134,7 +1134,7 @@ def getELMpage(protein, sequence, dump_file):
     response.close()
     form['sequence'] = '>' + protein + '\n' + sequence
     request2 = form.click()
-    opener = ClientCookie.build_opener(ClientCookie.HTTPEquivProcessor, \
+    opener = ClientCookie.build_opener(ClientCookie.HTTPEquivProcessor,
                                        ClientCookie.HTTPRefreshProcessor)
     ClientCookie.install_opener(opener)
     page = ClientCookie.urlopen(request2).read()
@@ -1145,7 +1145,7 @@ def getELMpage(protein, sequence, dump_file):
     currentTime = time.clock()
     oldTime = currentTime
     while response.find('atient') != -1:
-        if currentTime-oldTime > float(10):
+        if currentTime-oldTime > float(20
             print 'reread'
             newURL = myParse(response)
             try:

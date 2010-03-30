@@ -11,7 +11,7 @@ ELM HTML pages.  The ELM HTML pages are not
 The program takes a list of proteins to 
 annotate, a FASTA file, and an output directory.
 """
-import utils_motif, utils_fasta, utils_scripting, utils_graph
+import utils_motif, utils_fasta, utils_scripting, utils_graph, elm_tools
 import sys, os, time
 
 req_args = ['list of genes',
@@ -32,10 +32,9 @@ for gene in genes.keys():
     then_time = time.clock()
     current_time = time.clock()
     try:
-        utils_motif.getELMpage(gene, seq, html_dump_dir + gene + '.elm.html')
-        os.system('tidy ' 
-                  + html_dump_dir + gene + '.elm.html > '
-                  + html_dump_dir + gene + '.elm_tidy.html')
+        ofile = html_dump_dir + gene + '.elm.html'
+        utils_motif.getELMpage(gene, seq, ofile)
+        elm_tools.checkForErrors(ofile, elm_dump_dir, gene)
     except:
         pass
     
