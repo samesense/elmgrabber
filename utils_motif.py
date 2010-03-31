@@ -1127,6 +1127,7 @@ def myParse(page):
     return suffix.replace(';', '&')
 
 def getELMpage(protein, sequence, dump_file):
+    print 'getting page', protein
     request=urllib2.Request('http://elm.eu.org/')
     response = urllib2.urlopen(request)
     forms = ClientForm.ParseResponse(response)
@@ -1142,10 +1143,14 @@ def getELMpage(protein, sequence, dump_file):
     res = ClientCookie.urlopen(newURL)
     response = res.read()
     res.close()
+    print 'made it'
     currentTime = time.clock()
     oldTime = currentTime
+    with open(protein + '.init.html', 'w') as f:
+        f.write(response)
+    print 'writing file'
     while response.find('atient') != -1:
-        if currentTime-oldTime > float(20
+        if currentTime-oldTime > float(20):
             print 'reread'
             newURL = myParse(response)
             try:
@@ -1153,9 +1158,11 @@ def getELMpage(protein, sequence, dump_file):
                 res = ClientCookie.urlopen(newURL)
                 response = res.read()
                 res.close()
+                with open(protein + '.' + str(currentTime) + '.html', 'w') as f:
+                    f.write(response)
                 #print response
             except:
-                pass
+                print 'FAIL', protein
             oldTime = currentTime
         currentTime = time.clock()
     f = open(dump_file, 'w')
