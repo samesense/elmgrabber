@@ -48,7 +48,9 @@ def split_seq(seq_dict, size):
     newseq = []
     splitsize = 1.0/size*len(seq)
     for i in range(size):
-        newseq.append(seq[int(round(i*splitsize)):int(round((i+1)*splitsize))]) 
+        new_ls = seq[int(round(i*splitsize)):int(round((i+1)*splitsize))]
+        if len(new_ls) != 0:
+            newseq.append(new_ls) 
     return newseq
 
 def ls2dict(ls):
@@ -65,7 +67,7 @@ os.system('python checkELMpages.py ' + gene_ls_file
           + ' ' + html_dump_dir + ' > redo.protein.ls')
 
 protein_ls = utils_graph.getNodes('redo.protein.ls')
-protein_pieces_ls = split_seq(protein_ls, 30)
+protein_pieces_ls = split_seq(protein_ls, 15)
 process_ls = []
 for index in xrange(len(protein_pieces_ls)):
     protein_dict = ls2dict(protein_pieces_ls[index])

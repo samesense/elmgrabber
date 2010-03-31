@@ -29,12 +29,12 @@ fasta = utils_fasta.loadFASTA(sys.argv[2])
 
 for gene in genes.keys():
     seq = fasta[gene]
-    then_time = time.clock()
-    current_time = time.clock()
     try:
+        print 'here'
         ofile = html_dump_dir + gene + '.elm.html'
         utils_motif.getELMpage(gene, seq, ofile)
         elm_tools.checkForErrors(ofile, elm_dump_dir, gene)
     except:
+        print 'passing'
         pass
     
