@@ -67,7 +67,7 @@ os.system('python checkELMpages.py ' + gene_ls_file
           + ' ' + html_dump_dir + ' > redo.protein.ls')
 
 protein_ls = utils_graph.getNodes('redo.protein.ls')
-protein_pieces_ls = split_seq(protein_ls, 15)
+protein_pieces_ls = split_seq(protein_ls, 2)
 process_ls = []
 for index in xrange(len(protein_pieces_ls)):
     protein_dict = ls2dict(protein_pieces_ls[index])
