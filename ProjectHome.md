@@ -1,0 +1,1 @@
+The ELM Resource http://elm.eu.org/ annotates short eukaryotic motifs on protein sequences by matching regular expressions in protein regions that favor motifs.  The resource allows one protein query at a time.  This project automates queries at the command line to streamline protein annotation.
